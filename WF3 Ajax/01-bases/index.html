@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>AJAX</title>
+    </head>
+    <body>
+        
+        <h1 id="title"></h1>
+
+        <button id="change">Changer la phrase</button>
+
+        <script>
+
+            //AJAX en JavaScript
+            var xhr = new XMLHttpRequest();
+
+            //On suit la requete AJAX
+            xhr.addEventListener('readystatechange', function () {
+                if (4 === xhr.readyState){
+                    if (200 === xhr.status) {
+                        document.getElementById('title').innerHTML = xhr.response;//dans le h1 qui a l'ID 'title' l'echo dans le fichier php->worker.php est récupéré et va se caler dans le h1
+                        
+                    }
+                }
+            });
+
+
+            //On peut faire une requête HTTP
+            xhr.open('GET', './worker.php')
+
+
+            //On exécute la requête
+            xhr.send ();
+
+
+            //Quand oon va cliquer sur le boutton ca va changer la phrase!
+            var button = document.getElementById('change');
+
+            button.addEventListener('click', function (){
+                xhr.open('GET', './worker.php')
+                xhr.send ();
+            });
+                
+        
+        </script>
+
+    </body>
+</html>
